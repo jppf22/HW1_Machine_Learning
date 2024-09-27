@@ -167,12 +167,153 @@ Homework I -- Group 016\\
                         \item \( y_3 = 1 \rightarrow \text{Class A/C} \)
                     \end{itemize}
 
-              \item Decision Tree \\
+              \item Decision Tree
+
                     Since it is not possible to create any more subsets with a minimum of 4 observations, we can build the tree, taking into account that any ties are resolved by the majority class. \\
                     \begin{center}
                         \includegraphics[width=0.8\textwidth]{decision_tree_pen_and_paper.jpg}
                         \captionof{figure}{Decision tree drawn for the pen and paper exercise 1}
                     \end{center}
+          \end{itemize}
+    \item \begin{itemize}
+              \item Calculating Confusion Matrix entries
+
+                    $[\text{predicted}, \text{true}] = \text{value}$
+                    \begin{itemize}
+                        \item $[A, A] = 2$ \hspace{1cm} $[A, B] = 0$ \hspace{1cm} $[A, C] = 0$
+                        \item $[B, A] = 0$ \hspace{1cm} $[B, B] = 2 + 1 + 1 = 4$ \hspace{1cm} $[B, C] = 0$
+                        \item $[C, A] = 1$ \hspace{1cm} $[C, B] = 0$ \hspace{1cm} $[C, C] = 1 + 2 + 2 = 5$
+                    \end{itemize}
+              \item Filling in the Matrix
+                    \[
+                        \begin{array}{|c|c|c|c|}
+                            \hline
+                            \text{Predicted \textbackslash True} & A & B & C \\
+                            \hline
+                            A                                    & 2 & 0 & 0 \\
+                            \hline
+                            B                                    & 0 & 4 & 0 \\
+                            \hline
+                            C                                    & 1 & 0 & 5 \\
+                            \hline
+                        \end{array}
+                    \]
+          \end{itemize}
+    \item \begin{itemize}
+              \item Class A Calculations
+
+                    \[
+                        \text{Precision}_A = \frac{TP}{TP + FP} = \frac{2}{2 + 0} = 1.0
+                    \]
+
+                    \[
+                        \text{Recall}_A = \frac{TP}{TP + FN} = \frac{2}{2 + 1} = \frac{2}{3}
+                    \]
+
+                    \[
+                        F1_A = 2 \times \frac{\text{Precision}_A \times \text{Recall}_A}{\text{Precision}_A + \text{Recall}_A} = 2 \times \frac{1.0 \times \frac{2}{3}}{1.0 + \frac{2}{3}} = \frac{4}{5}
+                    \]
+
+              \item Class B Calculations
+
+                    \[
+                        \text{Precision}_B = \frac{TP}{TP + FP} = \frac{4}{4 + 0} = 1.0
+                    \]
+
+                    \[
+                        \text{Recall}_B = \frac{TP}{TP + FN} = \frac{4}{4 + 0} = 1.0
+                    \]
+
+                    \[
+                        F1_B = 2 \times \frac{\text{Precision}_B \times \text{Recall}_B}{\text{Precision}_B + \text{Recall}_B} = 2 \times \frac{1.0 \times 1.0}{1.0 + 1.0} = 1.0
+                    \]
+
+              \item Class C Calculations
+
+                    \[
+                        \text{Precision}_C = \frac{TP}{TP + FP} = \frac{5}{5 + 1} = \frac{5}{6}
+                    \]
+
+                    \[
+                        \text{Recall}_C = \frac{TP}{TP + FN} = \frac{5}{5 + 0} = 1.0
+                    \]
+
+                    \[
+                        F1_C = 2 \times \frac{\text{Precision}_C \times \text{Recall}_C}{\text{Precision}_C + \text{Recall}_C} = 2 \times \frac{\frac{5}{6} \times 1.0}{\frac{5}{6} + 1.0} = \frac{10}{11}
+                    \]
+
+              \item Conclusion
+
+                    The Class with the lowest training F1 score is \textbf{Class A}.
+          \end{itemize}
+    \item \begin{itemize}
+              \item Bin Creation
+
+                    \begin{itemize}
+                        \item Bin 1: $[0, 0.2[$
+                        \item Bin 2: $[0.2, 0.4[$
+                        \item Bin 3: $[0.4, 0.6[$
+                        \item Bin 4: $[0.6, 0.8[$
+                        \item Bin 5: $[0.8, 1]$
+                    \end{itemize}
+
+              \item Placement of $y_1$ values in respective bins
+
+                    \begin{itemize}
+                        \item Bin 1: Class A = 0, Class B = 1 (0.06), Class C = 2 (0.16, 0.01)
+                        \item Bin 2: Class A = 0, Class B = 2 (0.21, 0.30), Class C = 1 (0.22)
+                        \item Bin 3: Class A = 0 , Class B = 0, Class C = 1 (0.47)
+                        \item Bin 4: Class A = 2 (0.73, 0.76), Class B = 0, Class C = 0
+                        \item Bin 5: Class A = 1 (0.86), Class B = 1 (0.89), Class C = 1 (0.93)
+                    \end{itemize}
+
+              \item Relative Frequencies Calculation
+
+                    \[
+                        \begin{array}{|c|c|c|c|}
+                            \hline
+                            \text{Bin}   & \text{Class A} & \text{Class B} & \text{Class C} \\
+                            \hline
+                            \text{Bin 1} & 0              & 0.25           & 0.40           \\
+                            \text{Bin 2} & 0              & 0.50           & 0.20           \\
+                            \text{Bin 3} & 0              & 0              & 0.20           \\
+                            \text{Bin 4} & 0.667          & 0              & 0              \\
+                            \text{Bin 5} & 0.333          & 0.25           & 0.20           \\
+                            \hline
+                        \end{array}
+                    \]
+
+              \item Histogram
+
+                    \begin{center}
+                        \includegraphics[width=0.8\textwidth]{bin_histogram.jpg}
+                        \captionof{figure}{Histogram of the relative frequencies of the classes in each bin}
+                    \end{center}
+
+              \item $n$-ary Root Split Calculation
+
+                    To find the $n$-ary root split, the dominant class must be singled out for each bin:
+
+                    \begin{itemize}
+                        \item Bin 1: Dominant Class C (0.40)
+                        \item Bin 2: Dominant Class B (0.50)
+                        \item Bin 3: Dominant Class C (0.20)
+                        \item Bin 4: Dominant Class A (0.667)
+                        \item Bin 5: Class A is also present (0.333)
+                    \end{itemize}
+
+              \item Conclusion
+
+                    The \( n \)-ary root split can be defined based on the dominant classes:
+
+                    \begin{itemize}
+                        \item The first split could occur at Bin 1 with Class C.
+                        \item The second split could occur at Bin 2 with Class B.
+                        \item Subsequent splits would be based on the observed distributions in the remaining bins, particularly focusing on Class A’s dominance in Bin 4.
+                    \end{itemize}
+
+                    The decision tree's splits will optimize for maximum information gain based on these empirical distributions.
+
           \end{itemize}
 \end{enumerate}
 
@@ -195,22 +336,30 @@ Homework I -- Group 016\\
           \begin{center}
               \includegraphics{discrimantive_features_dense_probability.png}
           \end{center}
-    \item To measure accuracy levels originated from using a decision tree with the minimums sample split values (2, 5, 10, 20, 30, 50, 100) when branching, a stratified 80-20 training-testing split was performed. \\ \vspace{0.25em} Additionally, since \texttt{sklearn} performs non-deterministic thresholding of numeric variables in decision trees, the results were made by averaging over 10 runs per parametrization (leading to the error margins in the graph). \\ \vspace{0.25em} The following graph shows the different averaged accuracy levels for the decision tree classifiers generated for each minimum split: \\
+    \item To measure accuracy levels originated from using a decision tree with the minimums sample split values (2, 5, 10, 20, 30, 50, 100) when branching, a stratified 80-20 training-testing split was performed.
+
+          Additionally, since \texttt{sklearn} performs non-deterministic thresholding of numeric variables in decision trees, the results were made by averaging over 10 runs per parametrization (leading to the error margins in the graph).
+
+          The following graph shows the different averaged accuracy levels for the decision tree classifiers generated for each minimum split: \vskip 0.25cm
           \begin{center}
               \includegraphics{split_training_results.png}
           \end{center}
     \item The smaller decision tree minimum splits have the highest accuracy levels on the training set, while having the smaller values on the testing set, which indicates overfitting.
-          The following minimum splits lead to increansigly better accuracy values on the testing set, although continuing to decrease the accuracy on the training set, which indicates the model is starting to have better generalization capabilities and less overfitting. \\\vspace{0.25em}
-          Out of all the available minimum splits, the best pick would be the one leading to a smaller difference in accuracies between the two sets, which in this case would be 100. \\\vspace{0.25em}
+
+          The following minimum splits lead to increansigly better accuracy values on the testing set, although continuing to decrease the accuracy on the training set, which indicates the model is starting to have better generalization capabilities and less overfitting.
+
+          Out of all the available minimum splits, the best pick would be the one leading to a smaller difference in accuracies between the two sets, which in this case would be 100.
+
           Ideally with higher minimum sample split values, there would be a value leading high and identical accuracy levels on both sets.
     \item \begin{enumerate}[label=\textbf{\roman*.)}]
-              \item Using \textit{all} data to train a single decision tree classifier with a maximum depth of 3 leads to the following tree (\texttt{value} and \texttt{samples} expressed in proportion):\\
+              \item Using \textit{all} data to train a single decision tree classifier with a maximum depth of 3 leads to the following tree):\\
                     \includegraphics{decision_tree_value_counts.png}\\
                     \vspace{2em}
-                    But with this second view of the same tree, we can more easily understand the probability of each class in each node:\\
+                    But with this second view of the same tree, we can more easily understand the probability of each class in each node (\texttt{value} and \texttt{samples} expressed in proportion):\\
                     \includegraphics{decision_tree.png} \\
                     The \textcolor{orange}{"oranger"} the node, the higher the probability of the class being 0 (eq. non-diabetic), and the \textcolor{blue}{"bluer"} the node, the higher the probability of the class being 1 (eq. diabetic). \\
-              \item Overall, high \texttt{Glucose} and \texttt{BMI} are the most common indicator of diabetes. (agreeing with our analysis in \textit{exercise 1}). \\\vspace{0.25em}
+              \item Overall, high \texttt{Glucose} and \texttt{BMI} are the most common indicator of diabetes. (agreeing with our analysis in \textit{exercise 1}).
+
                     Following is a thorough analysis of the probability in each conditional association (extracted from the graph):
                     \vspace{0.5em}
                     \begin{itemize}
