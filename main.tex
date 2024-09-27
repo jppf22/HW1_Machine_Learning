@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\usepackage[paper=letterpaper,margin=2cm]{geometry}
+\usepackage[paper=letterpaper,margin=1.5cm]{geometry}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{newtxtext, newtxmath}
 \usepackage{enumitem}
@@ -320,7 +320,8 @@ Homework I -- Group 016\\
 \large{\textbf{Part II}: Programming}\normalsize
 
 \begin{enumerate}[leftmargin=\labelsep, label=\textbf{\arabic*.)}]
-    \item Applying \texttt{f\_classif} from the \texttt{sklearn} library upon the dataset (after splitting into feature data matrix and target vector) allows understanding of the discrimantive power of each feature: \vskip 0.25cm
+    \item Applying \texttt{f\_classif} from the \texttt{sklearn} library upon the dataset (after splitting into feature data matrix and target vector) allows understanding of the discrimantive power of each feature:
+
           \begin{lstlisting}[basicstyle=\ttfamily\centering]
 'Pregnancies': 39.67
 'Glucose': 213.16
@@ -332,36 +333,49 @@ Homework I -- Group 016\\
 'Age': 46.14
         \end{lstlisting}
           The scores indicate that \texttt{Glucose} is the \textbf{most discriminative} feature, whereas \texttt{BloodPressure} is the \textbf{least discriminative}.
-          The following plot shows the class-condition probability density functions for these two features:\vskip 0.25cm
+
+          The following plot shows the class-condition probability density functions for these two features:
+
           \begin{center}
               \includegraphics{discrimantive_features_dense_probability.png}
+              \captionof{figure}{Class-condition probability density functions for the most and least discriminative features}
           \end{center}
+
     \item To measure accuracy levels originated from using a decision tree with the minimums sample split values (2, 5, 10, 20, 30, 50, 100) when branching, a stratified 80-20 training-testing split was performed.
 
-          Additionally, since \texttt{sklearn} performs non-deterministic thresholding of numeric variables in decision trees, the results were made by averaging over 10 runs per parametrization (leading to the error margins in the graph).
-
-          The following graph shows the different averaged accuracy levels for the decision tree classifiers generated for each minimum split: \vskip 0.25cm
           \begin{center}
               \includegraphics{split_training_results.png}
+              \captionof{figure}{Accuracy levels for different minimum sample splits}
           \end{center}
-    \item The smaller decision tree minimum splits have the highest accuracy levels on the training set, while having the smaller values on the testing set, which indicates overfitting.
 
-          The following minimum splits lead to increansigly better accuracy values on the testing set, although continuing to decrease the accuracy on the training set, which indicates the model is starting to have better generalization capabilities and less overfitting.
+    \item The smaller decision tree minimum splits have the highest accuracy levels on the training set, while having the smaller values on the testing set, which indicates overfitting and poor generalization capabilities for these levels.
 
-          Out of all the available minimum splits, the best pick would be the one leading to a smaller difference in accuracies between the two sets, which in this case would be 100.
+          The higher minimum splits lead to increansigly better accuracy values on the testing set, although continuing to decrease the accuracy on the training set, which indicates the model is starting to have better generalization capabilities and less overfitting.
 
-          Ideally with higher minimum sample split values, there would be a value leading high and identical accuracy levels on both sets.
-    \item \begin{enumerate}[label=\textbf{\roman*.)}]
+          Out of all the available minimum splits, the best pick would be the one stricking the best balance between overall accuracy and variance), maximizing the first while minimizing the second, which in this case would be 100.
+
+          Ideally with higher minimum sample split values, there would be a value leading high and identical accuracy levels on both sets. However, there could also be underfitted values.
+    \item .
+          \begin{enumerate}[label=\textbf{\roman*.)},leftmargin=0em]
               \item Using \textit{all} data to train a single decision tree classifier with a maximum depth of 3 leads to the following tree):\\
-                    \includegraphics{decision_tree_value_counts.png}\\
-                    \vspace{2em}
-                    But with this second view of the same tree, we can more easily understand the probability of each class in each node (\texttt{value} and \texttt{samples} expressed in proportion):\\
-                    \includegraphics{decision_tree.png} \\
-                    The \textcolor{orange}{"oranger"} the node, the higher the probability of the class being 0 (eq. non-diabetic), and the \textcolor{blue}{"bluer"} the node, the higher the probability of the class being 1 (eq. diabetic). \\
-              \item Overall, high \texttt{Glucose} and \texttt{BMI} are the most common indicator of diabetes. (agreeing with our analysis in \textit{exercise 1}).
+                    \begin{center}
+                        \includegraphics{decision_tree_value_counts.png}
+                        \captionof{figure}{Decision tree with values and samples expressed in amount}
+                    \end{center}
+
+                    But with this second view of the same tree, we can more easily understand the probability of each class in each node (\texttt{value} and \texttt{samples} expressed in proportion):
+
+                    \begin{center}
+                        \includegraphics{decision_tree.png}
+                        \captionof{figure}{Decision tree color-coded by class probability and with values and samples expressed in proportion}
+                    \end{center}
+
+                    The \textcolor{orange}{"oranger"} the node, the higher the probability of the class being 0 (eq. non-diabetic), and the \textcolor{blue}{"bluer"} the node, the higher the probability of the class being 1 (eq. diabetic).
+
+              \item Overall, high \texttt{Glucose} and \texttt{BMI} are the most common indicator of diabetes (agreeing with our analysis in \textit{exercise 1}).
 
                     Following is a thorough analysis of the probability in each conditional association (extracted from the graph):
-                    \vspace{0.5em}
+
                     \begin{itemize}
                         \item $P( \text{\texttt{Diabetes}}) = 0.349$
                     \end{itemize}
@@ -395,8 +409,9 @@ Homework I -- Group 016\\
                                         \end{itemize}
                               \end{itemize}
                     \end{itemize}
-                    \vspace{0.5em}
+
                     From the analysis it is possible to easily understand the likelihood of a new patient, given his retrieved medical data, to have diabetes or not.
+
           \end{enumerate}
 \end{enumerate}
 \end{document}
